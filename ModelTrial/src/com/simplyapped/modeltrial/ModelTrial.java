@@ -4,7 +4,6 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -178,31 +177,4 @@ public class ModelTrial implements ApplicationListener {
     public void pause () {
     }
     
-}
-class PhilCameraInputController extends CameraInputController
-{
-	protected static class PhilCameraGestureListener extends CameraGestureListener
-	{
-		private float previousZoom; 
-		@Override
-		public boolean touchDown (float x, float y, int pointer, int button) {
-			previousZoom = 0;
-			return false;
-		}
-		
-		@Override
-		public boolean zoom (float initialDistance, float distance) {
-			float newZoom = distance - initialDistance;
-			float amount = newZoom - previousZoom;
-			previousZoom = newZoom;
-			float w = Gdx.graphics.getWidth(), h = Gdx.graphics.getHeight();
-			return controller.zoom((amount / ((w > h) ? h : w)) * 2000);
-		}
-	}
-
-	protected PhilCameraInputController(Camera camera)
-	{
-		super(new PhilCameraGestureListener(), camera);
-	}
-	
 }
